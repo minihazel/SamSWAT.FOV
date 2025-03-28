@@ -5,6 +5,7 @@ using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reflection;
+using HarmonyLib;
 
 namespace SamSWAT.FOV
 {
@@ -12,20 +13,7 @@ namespace SamSWAT.FOV
     {
         protected override MethodBase GetTargetMethod()
         {
-            return typeof(GameSettingsTab).GetMethod("Show");
-        }
-
-        [PatchPrefix]
-        private static void PatchPrefix(ref ReadOnlyCollection<int> ___readOnlyCollection_0)
-        {
-            if (FovPlugin.MaxFov.Value < FovPlugin.MinFov.Value)
-            {
-                FovPlugin.MinFov.Value = 50;
-                FovPlugin.MaxFov.Value = 75;
-            }
-
-            int rangeCount = FovPlugin.MaxFov.Value - FovPlugin.MinFov.Value + 1;
-            ___readOnlyCollection_0 = Array.AsReadOnly(Enumerable.Range(FovPlugin.MinFov.Value, rangeCount).ToArray());
+            return AccessTools.Method(typeof(GameSettingsTab), nameof(GameSettingsTab.Show));
         }
 
         [PatchPostfix]
@@ -38,7 +26,7 @@ namespace SamSWAT.FOV
             }
 
             int rangeCount = FovPlugin.MaxFov.Value - FovPlugin.MinFov.Value + 1;
-            ___readOnlyCollection_0 = Array.AsReadOnly(Enumerable.Range(FovPlugin.MinFov.Value, rangeCount).ToArray());
+            SettingsTab.BindNumberSliderToSetting(____fov, ___gclass1053_0.FieldOfView, FovPlugin.MinFov.Value, FovPlugin.MaxFov.Value);
         }
     }
 }

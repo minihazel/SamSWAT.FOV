@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace SamSWAT.FOV
 {
-    [BepInPlugin("com.samswat.fov", "SamSWAT.FOV", "1.0.0")]
+    [BepInPlugin("com.samswat.fov", "SamSWAT.FOV", "1.0.5")]
     public class FovPlugin : BaseUnityPlugin
     {
         internal static ConfigEntry<int> MinFov;
@@ -53,7 +53,7 @@ namespace SamSWAT.FOV
                 return;
             }
 
-            gameWorld.RegisteredPlayers.Find(p => p.IsYourPlayer).ProceduralWeaponAnimation.HandsContainer.CameraOffset = new Vector3(0.04f, 0.04f, HudFov.Value);
+            gameWorld.MainPlayer.ProceduralWeaponAnimation.HandsContainer.CameraOffset = new Vector3(0.04f, 0.04f, HudFov.Value);
         }
     }
 }

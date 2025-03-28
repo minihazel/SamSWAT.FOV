@@ -2,6 +2,7 @@
 using EFT.Animations;
 using System.Reflection;
 using UnityEngine;
+using HarmonyLib;
 
 namespace SamSWAT.FOV
 {
@@ -9,7 +10,7 @@ namespace SamSWAT.FOV
     {
         protected override MethodBase GetTargetMethod()
         {
-            return typeof(PlayerSpring).GetMethod("Start", BindingFlags.NonPublic | BindingFlags.Instance);
+            return AccessTools.Method(typeof(PlayerSpring), nameof(PlayerSpring.Start));
         }
 
         [PatchPostfix]

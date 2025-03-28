@@ -1,9 +1,7 @@
 ﻿using SPT.Reflection.Patching;
-using SPT.Reflection.Utils;
-using System;
-using System.Linq;
 using System.Reflection;
 using UnityEngine;
+using HarmonyLib;
 
 namespace SamSWAT.FOV
 {
@@ -11,8 +9,7 @@ namespace SamSWAT.FOV
     {
         protected override MethodBase GetTargetMethod()
         {
-            Type gclass911 = PatchConstants.EftTypes.Single(x => x.GetMethod("Clone") != null && x.GetField("NotificationTransportType") != null);
-            return gclass911.GetNestedTypes(PatchConstants.PrivateFlags)[0].GetMethod("method_0", PatchConstants.PrivateFlags);
+            return AccessTools.Method(typeof(GClass1053.Class1718), nameof(GClass1053.Class1718.method_0));
         }
 
         [PatchPostfix]

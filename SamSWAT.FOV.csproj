@@ -31,8 +31,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="0Harmony">
+      <HintPath>D:\SPT Iterations\SPT 3.11\BepInEx\core\0Harmony.dll</HintPath>
+    </Reference>
     <Reference Include="Assembly-CSharp">
-      <HintPath>References\Assembly-CSharp.dll</HintPath>
+      <HintPath>D:\SPT Iterations\SPT 3.11\EscapeFromTarkov_Data\Managed\Assembly-CSharp.dll</HintPath>
     </Reference>
     <Reference Include="BepInEx">
       <HintPath>References\BepInEx.dll</HintPath>
@@ -40,8 +43,11 @@
     <Reference Include="Comfort">
       <HintPath>References\Comfort.dll</HintPath>
     </Reference>
+    <Reference Include="Sirenix.Serialization">
+      <HintPath>D:\SPT Iterations\SPT 3.11\EscapeFromTarkov_Data\Managed\Sirenix.Serialization.dll</HintPath>
+    </Reference>
     <Reference Include="spt-reflection">
-      <HintPath>..\..\..\Desktop\General\SPT\3.11 Assemblies\spt-reflection.dll</HintPath>
+      <HintPath>D:\SPT Iterations\SPT 3.11\BepInEx\plugins\spt\spt-reflection.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="UnityEngine">
@@ -59,4 +65,7 @@
     <Compile Include="SettingsApplierPatch.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>xcopy /Y /D "$(TargetPath)" "D:\SPT Iterations\SPT 3.11\BepInEx\plugins\"</PostBuildEvent>
+  </PropertyGroup>
 </Project>
