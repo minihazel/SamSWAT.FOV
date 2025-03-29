@@ -66,6 +66,6 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>xcopy /Y /D "$(TargetPath)" "D:\SPT Iterations\SPT 3.11\BepInEx\plugins\"</PostBuildEvent>
+    <PostBuildEvent>xcopy /Y /D "$(TargetPath)" "$(ProjectDir)..\..\..\BepInEx\plugins\"</PostBuildEvent>
   </PropertyGroup>
 </Project>

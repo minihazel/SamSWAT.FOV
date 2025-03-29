@@ -13,6 +13,7 @@ namespace SamSWAT.FOV
         internal static ConfigEntry<int> MinFov;
         internal static ConfigEntry<int> MaxFov;
         internal static ConfigEntry<float> HudFov;
+        internal static ConfigEntry<float> HudVerticalFov;
 
         private void Awake()
         {
@@ -38,10 +39,20 @@ namespace SamSWAT.FOV
                 "Main Section",
                 "HUD FOV `Value`",
                 0.05f,
-                new ConfigDescription("Pseudo-value for HUD FOV, it will actually change your camera position relative to your body. The lower the value, the further away the camera is, meaning more hands and weapon in your field of view. Default is 0.05",
+                new ConfigDescription("Pseudo-value for HUD FOV, it will actually change your camera position HORIZONTALLY relative to your body. " +
+                "The lower the value, the further backwards the camera is and will result in more hands and weapon being in view. Default is 0.05",
+                new AcceptableValueRange<float>(-0.1f, 0.1f)));
+
+            HudVerticalFov = Config.Bind(
+                "Main Section",
+                "HUD Vertical FOV `Value`",
+                0.05f,
+                new ConfigDescription("Pseudo-value for HUD FOV, it will actually change your camera position VERTICALLY relative to your body. " +
+                "The lower the value, the further down the camera is and will result in arms and weapon moving upwards. Default is 0.05",
                 new AcceptableValueRange<float>(-0.1f, 0.1f)));
 
             HudFov.SettingChanged += HudFov_SettingChanged;
+            HudVerticalFov.SettingChanged -= HudVerticalFov_SettingChanged;
         }
 
         private void HudFov_SettingChanged(object sender, EventArgs e)
@@ -53,7 +64,19 @@ namespace SamSWAT.FOV
                 return;
             }
 
-            gameWorld.MainPlayer.ProceduralWeaponAnimation.HandsContainer.CameraOffset = new Vector3(0.04f, 0.04f, HudFov.Value);
+            gameWorld.MainPlayer.ProceduralWeaponAnimation.HandsContainer.CameraOffset = new Vector3(0.04f, HudVerticalFov.Value, HudFov.Value);
+        }
+
+        private void HudVerticalFov_SettingChanged(object sender, EventArgs e)
+        {
+            var gameWorld = Singleton<GameWorld>.Instance;
+
+            if (gameWorld == null || gameWorld.RegisteredPlayers == null)
+            {
+                return;
+            }
+
+            gameWorld.MainPlayer.ProceduralWeaponAnimation.HandsContainer.CameraOffset = new Vector3(0.04f, HudVerticalFov.Value, HudFov.Value);
         }
     }
 }
