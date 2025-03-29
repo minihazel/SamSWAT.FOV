@@ -16,7 +16,7 @@ namespace SamSWAT.FOV
         [PatchPostfix]
         private static void PatchPostfix(ref Vector3 ___CameraOffset)
         {
-            ___CameraOffset = new Vector3(0.04f, FovPlugin.HudVerticalFov.Value, FovPlugin.HudFov.Value);
+            ___CameraOffset = new Vector3(0.04f, FovPlugin.VerticalHudFov.Value, FovPlugin.HorizontalHudFov.Value);
         }
     }
 }
