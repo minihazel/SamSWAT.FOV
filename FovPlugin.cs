@@ -37,22 +37,22 @@ namespace SamSWAT.FOV
 
             HudFov = Config.Bind(
                 "Main Section",
-                "HUD FOV `Value`",
+                "Horizontal HUD FOV `Value`",
                 0.05f,
                 new ConfigDescription("Pseudo-value for HUD FOV, it will actually change your camera position HORIZONTALLY relative to your body. " +
-                "The lower the value, the further backwards the camera is and will result in more hands and weapon being in view. Default is 0.05",
+                "The lower the value, the further backwards the camera is, and will result in more hands and weapon being in view. Default is 0.05",
                 new AcceptableValueRange<float>(-0.1f, 0.1f)));
 
             HudVerticalFov = Config.Bind(
                 "Main Section",
-                "HUD Vertical FOV `Value`",
+                "Vertical HUD FOV `Value`",
                 0.05f,
                 new ConfigDescription("Pseudo-value for HUD FOV, it will actually change your camera position VERTICALLY relative to your body. " +
-                "The lower the value, the further down the camera is and will result in arms and weapon moving upwards. Default is 0.05",
+                "The lower the value, the further down the camera is, and will result in arms and weapon moving upwards. Default is 0.05",
                 new AcceptableValueRange<float>(-0.1f, 0.1f)));
 
             HudFov.SettingChanged += HudFov_SettingChanged;
-            HudVerticalFov.SettingChanged -= HudVerticalFov_SettingChanged;
+            HudVerticalFov.SettingChanged += HudVerticalFov_SettingChanged;
         }
 
         private void HudFov_SettingChanged(object sender, EventArgs e)
