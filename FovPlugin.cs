@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace SamSWAT.FOV
 {
-    [BepInPlugin("com.samswat.fov", "SamSWAT.FOV", "1.0.5")]
+    [BepInPlugin("com.samswat.fov", "SamSWAT.FOV", "1.0.6")]
     public class FovPlugin : BaseUnityPlugin
     {
         internal static ConfigEntry<int> MinFov;
